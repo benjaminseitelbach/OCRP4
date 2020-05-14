@@ -198,4 +198,26 @@ public class FareCalculatorServiceTest {
     	assertEquals( (396 * 24 * Fare.CAR_RATE_PER_HOUR) - (0.5 * Fare.CAR_RATE_PER_HOUR), ticket.getPrice());   	
     }
     
+    @Test
+	public void calculaterFareReccurentClientTest() {
+		
+		Date inTime = new Date();
+		inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));// 1 hour parking time
+		Date outTime = new Date();
+		ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
+		
+		ticket.setInTime(inTime);
+		ticket.setOutTime(outTime);
+		ticket.setParkingSpot(parkingSpot);
+
+		fareCalculatorService.calculateFare(ticket, 2);
+
+		double expectedPrice = Fare.CAR_RATE_PER_HOUR - (0.5 * Fare.CAR_RATE_PER_HOUR); 
+		expectedPrice = expectedPrice - (0.05 * expectedPrice);
+		System.out.println(expectedPrice);
+		assertEquals(ticket.getPrice(), expectedPrice);
+
+	}
+	
+    
 }
