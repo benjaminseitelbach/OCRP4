@@ -2,11 +2,6 @@
 create database prod;
 use prod;
 
-SELECT * FROM ticket;
-SELECT * FROM parking;
-
-SELECT AVAILABLE FROM PARKING WHERE PARKING_NUMBER = '1';
-
 create table parking(
 PARKING_NUMBER int PRIMARY KEY,
 AVAILABLE bool NOT NULL,

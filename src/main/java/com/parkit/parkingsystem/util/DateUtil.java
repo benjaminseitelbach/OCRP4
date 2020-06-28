@@ -6,7 +6,6 @@ public class DateUtil {
 
 	public static int getNumberOfDaysInMonth(int monthNumber, int year) {
 		int numberOfDaysInMonth = 0;
-
 		
 		if (monthNumber == 1) {
 			//February
@@ -51,8 +50,7 @@ public class DateUtil {
 	}
 	
 	public static double getDurationHours(Date inDate, Date outDate) {
-		System.out.println("in date:" + inDate);
-		System.out.println("out date:" + outDate);
+
 		int inYear = inDate.getYear();
 		int outYear = outDate.getYear();
 		
@@ -74,13 +72,12 @@ public class DateUtil {
 
 		if (outYear > inYear) {
 			// YEAR CHANGING
-			int monthsNumber = 12 - inMonth + outMonth + 1;
+			//int monthsNumber = 12 - inMonth + outMonth + 1;
 
 			int numberOfDaysInMonth = 0;
 
 			for (int monthNumber = inMonth; monthNumber <= 11; monthNumber++) {
 				numberOfDaysInMonth = getNumberOfDaysInMonth(monthNumber, inYear);
-				System.out.println("number of days in month " + monthNumber + " : " + numberOfDaysInMonth);
 				if (monthNumber == inMonth) {
 					durationDays = numberOfDaysInMonth - inMonthDay;
 				} else {
@@ -92,7 +89,6 @@ public class DateUtil {
 			
 			for (int monthNumber = 0; monthNumber <= outMonth; monthNumber++) {
 				numberOfDaysInMonth = getNumberOfDaysInMonth(monthNumber, outYear);
-				System.out.println("number of days in month " + monthNumber + " : " + numberOfDaysInMonth);
 				if (monthNumber == outMonth) {
 					durationDays += outMonthDay;
 				} else {
@@ -101,24 +97,20 @@ public class DateUtil {
 				}
 
 			}
-			System.out.println("duration days:" + durationDays);
 			durationHours = ((24 * durationDays) - inHour - (inMinute / 60)) + outHour + (outMinute / 60);
-			System.out.println("duration hours:" + durationHours);
 
 		} else {
 			// SAME YEAR
 			if (outMonth > inMonth) {
 				// MONTH CHANGING
 				int monthsNumber = outMonth - inMonth + 1;
-				System.out.println("in month:" + inMonth);
-				System.out.println("out month:" + outMonth);
-				System.out.println("months number:" + monthsNumber);
+
 				int[] tableau = new int[monthsNumber];
 				int i = 0;
-				// durationDays = 0;
+
 				for (int monthNumber = inMonth; monthNumber <= outMonth; monthNumber++) {
 					tableau[i] = getNumberOfDaysInMonth(monthNumber, inYear);
-					System.out.println("number of days in month " + monthNumber + " : " + tableau[i]);
+
 					if (i == 0) {
 						durationDays = tableau[i] - inMonthDay;
 					} else {
@@ -132,10 +124,9 @@ public class DateUtil {
 
 					i++;
 				}
-				System.out.println("duration days:" + durationDays);
 
 				durationHours = ((24 * durationDays) - inHour - (inMinute / 60)) + outHour + (outMinute / 60);
-				System.out.println("duration hours:" + durationHours);
+
 
 			} else {
 				if (outMonthDay > inMonthDay) {
@@ -153,7 +144,6 @@ public class DateUtil {
 
 		}
 		
-		System.out.println("duration hours before 30 minutes free parking:" + durationHours);
 		return durationHours;
 	}
 }

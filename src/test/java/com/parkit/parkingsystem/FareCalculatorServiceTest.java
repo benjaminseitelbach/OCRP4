@@ -32,14 +32,12 @@ public class FareCalculatorServiceTest {
 
     @BeforeEach
     private void setUpPerTest() {
-    	System.out.println("Test start");
         ticket = new Ticket();
     }
     
     @AfterEach
     private void cleanPerTest() {
     	ticket = null;
-    	System.out.println("End test");
     }
     
     
@@ -168,8 +166,6 @@ public class FareCalculatorServiceTest {
     	Date outTime = new Date(2020, 2, 25);
     	outTime.setHours(21);
     	outTime.setMinutes(30);
-    	System.out.println("in:" + inTime);
-    	System.out.println("out:" + outTime);
     	ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
     	
     	ticket.setInTime(inTime);
@@ -187,8 +183,6 @@ public class FareCalculatorServiceTest {
     	Date outTime = new Date(2021, 4, 30);
     	outTime.setHours(23);
     	outTime.setMinutes(0);
-    	System.out.println("in:" + inTime);
-    	System.out.println("out:" + outTime);
     	ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
     	
     	ticket.setInTime(inTime); 
@@ -204,17 +198,13 @@ public class FareCalculatorServiceTest {
 		Date inTime = new Date();
 		inTime.setTime(System.currentTimeMillis() - (60 * 60 * 1000));// 1 hour parking time
 		Date outTime = new Date();
-		ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
-		
+		ParkingSpot parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);		
 		ticket.setInTime(inTime);
 		ticket.setOutTime(outTime);
 		ticket.setParkingSpot(parkingSpot);
-
 		fareCalculatorService.calculateFare(ticket, 2);
-
 		double expectedPrice = Fare.CAR_RATE_PER_HOUR - (0.5 * Fare.CAR_RATE_PER_HOUR); 
 		expectedPrice = expectedPrice - (0.05 * expectedPrice);
-		System.out.println(expectedPrice);
 		assertEquals(ticket.getPrice(), expectedPrice);
 
 	}

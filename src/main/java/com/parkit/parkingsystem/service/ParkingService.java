@@ -21,7 +21,6 @@ public class ParkingService {
     private ParkingSpotDAO parkingSpotDAO;
     private TicketDAO ticketDAO;
 
-    //private FareCalculatorService fareCalculatorService = new FareCalculatorService(ticketDAO);
     
     public ParkingService(InputReaderUtil inputReaderUtil, ParkingSpotDAO parkingSpotDAO, TicketDAO ticketDAO){
         this.inputReaderUtil = inputReaderUtil;
@@ -33,8 +32,8 @@ public class ParkingService {
         try{
             ParkingSpot parkingSpot = getNextParkingNumberIfAvailable();
             int ticketID = parkingSpot.getId();
-            System.out.println("ID:" + ticketID);
-            if(parkingSpot !=null && parkingSpot.getId() > 0){
+
+            if(ticketID > 0){
                 String vehicleRegNumber = getVehichleRegNumber();
                 parkingSpot.setAvailable(false);
                 parkingSpotDAO.updateParking(parkingSpot);//allot this parking space and mark it's availability as false
@@ -108,9 +107,7 @@ public class ParkingService {
             Date outTime = new Date();
             ticket.setOutTime(outTime);
             int vehicleRegNumberCount = ticketDAO.getVehicleRegNumberCount(vehicleRegNumber);
-            //boolean reccurentClient = fareCalculatorService.isReccurentClient(ticketDAO, ticket);
             fareCalculatorService.calculateFare(ticket, vehicleRegNumberCount);
-            //fareCalculatorService.calculateFareReccurentClient(ticketDAO, ticket);
             if(ticketDAO.updateTicket(ticket)) {
                 ParkingSpot parkingSpot = ticket.getParkingSpot();
                 parkingSpot.setAvailable(true);

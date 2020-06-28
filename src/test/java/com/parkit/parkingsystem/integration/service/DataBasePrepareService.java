@@ -44,9 +44,9 @@ public class DataBasePrepareService {
     	}catch (Exception e){
              e.printStackTrace();
         }finally {
-        	 dataBaseTestConfig.closeConnection(connection);
-        	 return count;
+        	 dataBaseTestConfig.closeConnection(connection);      	 
         }
+    	return count;
 
     }
     
@@ -61,16 +61,13 @@ public class DataBasePrepareService {
 	        ResultSet rs = ps.executeQuery();
 	        rs.next();
 	        parkingAvailability = rs.getBoolean(2);
-	        //System.out.println(rs.getInt(1));
 	        
     	}catch (Exception e){
              e.printStackTrace();
         }finally {
-        	 dataBaseTestConfig.closeConnection(connection);
-        	 //System.out.println(parkingAvailability);
-        	 return parkingAvailability;
+        	 dataBaseTestConfig.closeConnection(connection);       	        	 
         }
-
+    	return parkingAvailability;
     }
     
     public double getFare() {
@@ -84,16 +81,13 @@ public class DataBasePrepareService {
 	        ResultSet rs = ps.executeQuery();
 	        rs.next();
 	        fare = rs.getDouble(4);
-	        //System.out.println(rs.getInt(1));
 	        
     	}catch (Exception e){
              e.printStackTrace();
         }finally {
-        	 dataBaseTestConfig.closeConnection(connection);
-        	 //System.out.println(parkingAvailability);
-        	 return fare;
+        	 dataBaseTestConfig.closeConnection(connection);        	 
         }
-
+    	return fare;
     }
     
     public Date getOutTime() {
@@ -107,15 +101,12 @@ public class DataBasePrepareService {
 	        ResultSet rs = ps.executeQuery();
 	        rs.next();
 	        outTime = rs.getDate(6);
-	        //System.out.println(rs.getInt(1));
 	        
     	}catch (Exception e){
              e.printStackTrace();
         }finally {
-        	 dataBaseTestConfig.closeConnection(connection);
-        	 //System.out.println(parkingAvailability);
-        	 return outTime;
+        	 dataBaseTestConfig.closeConnection(connection);       	 
         }
-
+    	return outTime;
     }
 }
